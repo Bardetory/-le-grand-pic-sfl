@@ -41,11 +41,10 @@ document.querySelectorAll('.accordion__trigger').forEach(trigger => {
 const APARTMENT = { coords: [45.401, 6.337], label: "Le Grand Pic — l'appartement" };
 
 const POINTS_OF_INTEREST = [
-  { coords: [45.4015, 6.3378], label: 'Télésiège du Mollaret' },
-  { coords: [45.4008, 6.3365], label: 'Boulangerie' },
-  { coords: [45.4012, 6.3362], label: 'Sherpa (supérette)' },
-  { coords: [45.4022, 6.3385], label: 'Restaurants du haut de station' },
-  { coords: [45.4005, 6.3368], label: 'Espace bien-être / balnéo' }
+  { coords: [45.42114966247592, 6.365413096670549], label: 'Télésiège du Mollaret' },
+  { coords: [45.42131490426381, 6.363923125824574], label: 'Boulangerie' },
+  { coords: [45.42130526170192, 6.363416605674961], label: 'Spar (supérette)' },
+  { coords: [45.420143740068006, 6.363138475414532], label: 'Espace bien-être / balnéo' }
 ];
 
 if (document.getElementById('map') && window.L) {
