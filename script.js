@@ -34,25 +34,42 @@ document.querySelectorAll('.accordion__trigger').forEach(trigger => {
 });
 
 // ---------- Map ----------
+// ⚠️ COORDONNÉES À REMPLACER ⚠️
+// Pour chaque point, ouvre Google Maps, fais un clic droit sur l'endroit exact,
+// clique sur les chiffres qui apparaissent en haut (ex: 45.401234, 6.337456)
+// pour les copier, puis colle-les ci-dessous à la place des valeurs actuelles.
+const APARTMENT = { coords: [45.401, 6.337], label: "Le Grand Pic — l'appartement" };
+
+const POINTS_OF_INTEREST = [
+  { coords: [45.4015, 6.3378], label: 'Télésiège du Mollaret' },
+  { coords: [45.4008, 6.3365], label: 'Boulangerie' },
+  { coords: [45.4012, 6.3362], label: 'Sherpa (supérette)' },
+  { coords: [45.4022, 6.3385], label: 'Restaurants du haut de station' },
+  { coords: [45.4005, 6.3368], label: 'Espace bien-être / balnéo' }
+];
+
 if (document.getElementById('map') && window.L) {
-  const center = [45.401, 6.337]; // Coordonnées approximatives de Saint-François-Longchamp, à ajuster avec l'adresse exacte
-  const map = L.map('map', { scrollWheelZoom: false }).setView(center, 15);
+  const map = L.map('map', { scrollWheelZoom: false }).setView(APARTMENT.coords, 16);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
     maxZoom: 18
   }).addTo(map);
 
-  const points = [
-    { coords: center, label: "Le Grand Pic — l'appartement" },
-    { coords: [45.4015, 6.3378], label: 'Télésiège du Mollaret' },
-    { coords: [45.4008, 6.3365], label: 'Boulangerie' },
-    { coords: [45.4012, 6.3362], label: 'Sherpa (supérette)' },
-    { coords: [45.4022, 6.3385], label: 'Restaurants du haut de station' },
-    { coords: [45.4005, 6.3368], label: 'Espace bien-être / balnéo' }
-  ];
+  // Icône ambre distincte pour l'appartement
+  const apartmentIcon = L.divIcon({
+    className: 'apartment-marker',
+    html: '<span></span>',
+    iconSize: [22, 22],
+    iconAnchor: [11, 11]
+  });
 
-  points.forEach(p => {
+  L.marker(APARTMENT.coords, { icon: apartmentIcon, zIndexOffset: 1000 })
+    .addTo(map)
+    .bindPopup(`<strong>${APARTMENT.label}</strong>`)
+    .openPopup();
+
+  POINTS_OF_INTEREST.forEach(p => {
     L.marker(p.coords).addTo(map).bindPopup(p.label);
   });
 }
