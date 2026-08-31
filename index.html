@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Grand Pic — Studio ski aux pieds à Saint-François-Longchamp</title>
+<meta name="description" content="Studio 2 à 6 personnes face au télésiège du Mollaret, à Saint-François-Longchamp. Ski aux pieds, balcon vue montagne, parking gratuit. Demande de réservation en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand">Le Grand Pic</a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#studio">Le studio</a>
+      <a href="#emplacement">Emplacement</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#faq">Questions</a>
+      <a href="#reservation" class="nav__cta">Vérifier les disponibilités</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <img src="images/batiment-exterieur.jpg" alt="Immeuble Le Grand Pic à Saint-François-Longchamp, entouré de montagnes" class="hero__img">
+    <div class="hero__scrim"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Saint-François-Longchamp · Savoie</p>
+      <h1>Votre refuge au pied des pistes</h1>
+      <p class="hero__lede">Un studio pensé pour un séjour sans contrainte, face au télésiège du Mollaret : les pistes à 100 mètres, les commerces à pied, et une vue qui n'appartient qu'à vous.</p>
+      <div class="hero__badges">
+        <span>2 à 6 personnes</span>
+        <span>Ski aux pieds</span>
+        <span>Parking gratuit</span>
+      </div>
+      <a href="#reservation" class="btn btn--primary">Vérifier les disponibilités</a>
+    </div>
+  </section>
+
+  <section id="studio" class="studio">
+    <div class="studio__text">
+      <p class="section__eyebrow">Le studio</p>
+      <h2>Confort et ambiance montagnarde</h2>
+      <p>Situé au rez-de-chaussée de la résidence Le Grand Pic, ce studio de 2 à 6 personnes a été refait pour offrir tout le nécessaire d'un vrai chez-soi de vacances : un coin repas convivial, une cuisine neuve entièrement équipée, et une salle de bain moderne avec douche à l'italienne.</p>
+      <p>L'atout du lieu : sa situation. Le télésiège du Mollaret, qui donne un accès direct vers Valmorel, se trouve à moins de 50 mètres. Écoles de ski, location de matériel et commerces essentiels sont accessibles à pied, à moins de 100 mètres.</p>
+      <ul class="checklist">
+        <li>Cuisine équipée : plaques, four, lave-vaisselle 10 couverts, rangements</li>
+        <li>Salle de bain refaite : douche à l'italienne, WC, sèche-serviette</li>
+        <li>Balcon avec vue dégagée sur les montagnes</li>
+        <li>Casier à skis privatif sur le même étage, range-chaussures à l'entrée</li>
+        <li>Parking gratuit devant l'immeuble, entrée sécurisée</li>
+      </ul>
+    </div>
+    <div class="studio__gallery">
+      <img src="images/cuisine-salon-tv.jpg" alt="Coin cuisine et salle à manger avec télévision">
+      <img src="images/salon-canape-rangements.jpg" alt="Canapé et rangements du salon">
+      <img src="images/salon-table-balcon.jpg" alt="Salle à manger avec accès au balcon">
+    </div>
+  </section>
+
+  <section class="sleeps">
+    <p class="section__eyebrow">Couchages</p>
+    <h2>Une capacité modulable, jusqu'à 6 personnes</h2>
+    <div class="sleeps__grid">
+      <figure>
+        <img src="images/chambre-vue-montagne.jpeg" alt="Lits superposés près de la baie vitrée, vue sur la montagne">
+        <figcaption>2 lits superposés dans le séjour, face à la vue</figcaption>
+      </figure>
+      <figure>
+        <img src="images/chambre-entree-deplie.jpeg" alt="Lits superposés dépliés dans le couloir d'entrée">
+        <figcaption>2 lits superposés dans l'entrée</figcaption>
+      </figure>
+      <figure>
+        <img src="images/entree-rangement-skis.jpeg" alt="Rangement à chaussures et porte-manteaux à l'entrée">
+        <figcaption>Range-chaussures et porte-manteaux à l'entrée</figcaption>
+      </figure>
+    </div>
+    <p class="sleeps__note">Un canapé-lit confortable complète les couchages dans le séjour, pour accueillir jusqu'à 6 personnes au total.</p>
+  </section>
+
+  <section class="vue-highlight">
+    <img src="images/vue-balcon-hiver.jpeg" alt="Vue depuis le balcon en hiver, immeuble entouré de montagnes enneigées">
+    <div class="vue-highlight__caption">
+      <p>Vue imprenable depuis le balcon, hiver comme été</p>
+    </div>
+  </section>
+
+  <section id="emplacement" class="location">
+    <p class="section__eyebrow">Emplacement</p>
+    <h2>À Saint-François-Longchamp, tout est à portée de pas</h2>
+    <p class="location__intro">Station familiale et conviviale de Maurienne, entre 1200 m et 2832 m d'altitude, reliée à un domaine de 165 km de pistes. Autour de l'appartement, l'essentiel se rejoint à pied.</p>
+
+    <div class="stats">
+      <div class="stat"><strong>2186 h</strong><span>de soleil par an</span></div>
+      <div class="stat"><strong>1ère</strong><span>station de Maurienne</span></div>
+      <div class="stat"><strong>165 km</strong><span>de pistes, Grand Domaine</span></div>
+    </div>
+
+    <div id="map" class="map" role="img" aria-label="Carte de Saint-François-Longchamp avec les points d'intérêt autour de l'appartement"></div>
+    <p class="map__note">Positions approximatives, à ajuster avec l'adresse exacte de la résidence.</p>
+
+    <ul class="nearby">
+      <li><strong>Télésiège du Mollaret</strong> — moins de 50 m, accès direct vers Valmorel</li>
+      <li><strong>Boulangerie</strong> — environ 100 m, la seule de la station</li>
+      <li><strong>Sherpa</strong> — supérette à proximité immédiate</li>
+      <li><strong>Restaurants</strong> — plusieurs adresses sur le haut de la station</li>
+      <li><strong>Espace bien-être</strong> — sauna, hammam, jacuzzis, massages, à 100 m</li>
+    </ul>
+  </section>
+
+  <section id="galerie" class="gallery">
+    <p class="section__eyebrow">Galerie</p>
+    <h2>L'appartement en images</h2>
+    <div class="gallery__grid">
+      <img src="images/batiment-exterieur.jpg" alt="Immeuble Le Grand Pic au printemps">
+      <img src="images/vue-balcon-hiver.jpeg" alt="Vue depuis le balcon en hiver" class="span-2">
+      <img src="images/salon-table-balcon.jpg" alt="Salon avec accès au balcon">
+      <img src="images/cuisine-salon-tv.jpg" alt="Cuisine et coin repas">
+      <img src="images/sdb-douche.jpeg" alt="Douche à l'italienne">
+      <img src="images/sdb-lavabo.jpeg" alt="Salle de bain, meuble vasque">
+      <img src="images/chambre-vue-montagne.jpeg" alt="Lits superposés avec vue montagne" class="span-2">
+      <img src="images/salon-canape-rangements.jpg" alt="Canapé et rangements">
+    </div>
+  </section>
+
+  <section id="faq" class="faq">
+    <p class="section__eyebrow">Questions fréquentes</p>
+    <h2>Tout ce qu'il faut savoir avant de réserver</h2>
+    <div class="accordion">
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          Qu'est-ce qui est fourni dans la cuisine ?
+        </button>
+        <div class="accordion__panel">
+          <p>La cuisine, neuve, comprend des plaques de cuisson, un four, un lave-vaisselle pour 10 couverts, ainsi que des rangements pour la vaisselle, les couverts et le petit électroménager. De quoi cuisiner normalement pendant tout le séjour.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          Combien de personnes peuvent dormir dans le studio ?
+        </button>
+        <div class="accordion__panel">
+          <p>Le studio accueille de 2 à 6 personnes : deux lits superposés dans le séjour, deux lits superposés dans l'entrée, et un canapé-lit confortable dans le séjour.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          Où puis-je me garer ?
+        </button>
+        <div class="accordion__panel">
+          <p>Un parking gratuit se trouve directement devant l'immeuble. L'entrée de la résidence est sécurisée.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          Comment fonctionne le casier à skis ?
+        </button>
+        <div class="accordion__panel">
+          <p>Un casier à skis privatif est mis à disposition, sur le même étage que l'appartement. Un range-chaussures est également disponible à l'entrée du studio.</p>
+        </div>
+      </div>
+
+      <div class="accordion__item">
+        <button class="accordion__trigger" aria-expanded="false">
+          Comment se passe une demande de réservation ?
+        </button>
+        <div class="accordion__panel">
+          <p>Choisissez vos dates dans le calendrier et complétez le formulaire ci-dessous. La demande est envoyée directement par email ; vous recevrez une confirmation dans les meilleurs délais.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="reservation" class="reservation">
+    <p class="section__eyebrow">Disponibilités &amp; réservation</p>
+    <h2>Demander une réservation</h2>
+    <p class="reservation__intro">Aucune date n'est bloquée pour le moment. Tarif unique : <strong>800&nbsp;€ / semaine</strong>.</p>
+
+    <div class="reservation__grid">
+      <div class="calendar-wrap">
+        <div class="calendar-header">
+          <button id="prevMonth" class="calendar-nav" aria-label="Mois précédent">‹</button>
+          <h3 id="calendarLabel"></h3>
+          <button id="nextMonth" class="calendar-nav" aria-label="Mois suivant">›</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <div class="calendar-legend">
+          <span class="dot dot--available"></span> Disponible
+        </div>
+      </div>
+
+      <form name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="res-form">
+        <input type="hidden" name="form-name" value="reservation">
+        <p class="hidden-field"><label>Ne pas remplir : <input name="bot-field"></label></p>
+
+        <label>Nom et prénom
+          <input type="text" name="nom" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" required>
+        </label>
+        <label>Téléphone
+          <input type="tel" name="telephone">
+        </label>
+        <div class="res-form__dates">
+          <label>Arrivée
+            <input type="date" name="arrivee" id="dateArrivee" required>
+          </label>
+          <label>Départ
+            <input type="date" name="depart" id="dateDepart" required>
+          </label>
+        </div>
+        <label>Nombre de personnes
+          <input type="number" name="personnes" min="1" max="6" value="2" required>
+        </label>
+        <label>Message
+          <textarea name="message" rows="4" placeholder="Une précision à nous transmettre ?"></textarea>
+        </label>
+        <button type="submit" class="btn btn--primary">Envoyer la demande</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      <p class="footer__brand">Le Grand Pic</p>
+      <p>130 rue de Sarvatan<br>73130 Saint-François-Longchamp</p>
+    </div>
+    <div class="footer__contact">
+      <p>Une question ? <a href="#reservation">Contactez-nous via le formulaire</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
