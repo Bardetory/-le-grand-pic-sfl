@@ -38,7 +38,7 @@ document.querySelectorAll('.accordion__trigger').forEach(trigger => {
 // Pour chaque point, ouvre Google Maps, fais un clic droit sur l'endroit exact,
 // clique sur les chiffres qui apparaissent en haut (ex: 45.401234, 6.337456)
 // pour les copier, puis colle-les ci-dessous à la place des valeurs actuelles.
-const APARTMENT = { coords: [45.401, 6.337], label: "Le Grand Pic — l'appartement" };
+const APARTMENT = { coords: [45.42052344252663, 6.363576576401391], label: "Le Grand Pic — l'appartement" };
 
 const POINTS_OF_INTEREST = [
   { coords: [45.42114966247592, 6.365413096670549], label: 'Télésiège du Mollaret' },
