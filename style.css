@@ -321,19 +321,20 @@ main section {
 .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: .85rem; }
 .calendar-grid .dow { font-weight: 600; color: var(--slate-soft); padding-bottom: .4rem; font-size: .75rem; }
 .calendar-grid .day { padding: .5rem 0; border-radius: var(--radius); color: var(--slate); }
-.calendar-grid .day.available { background: rgba(92,124,135,.12); color: var(--spruce); font-weight: 500; cursor: pointer; }
-.calendar-grid .day.available:hover { background: rgba(92,124,135,.25); }
+.calendar-grid .day { padding: .5rem 0; border-radius: var(--radius); color: var(--slate); background: rgba(0,0,0,.02); cursor: pointer; }
+.calendar-grid .day:hover { background: rgba(92,124,135,.2); }
 .calendar-grid .day.empty { visibility: hidden; }
-.calendar-grid .day--start,
-.calendar-grid .day--end {
-  background: var(--larch);
-  color: #fff;
-  font-weight: 600;
-}
-.calendar-grid .day--range { background: rgba(185,112,47,.25); }
-.calendar-legend { margin-top: 1rem; font-size: .8rem; color: var(--slate-soft); display: flex; align-items: center; gap: .5rem; }
+.calendar-grid .day--peak { background: rgba(185,112,47,.15); color: var(--larch-dark); font-weight: 500; }
+.calendar-grid .day--selected { background: var(--spruce); color: #fff; font-weight: 600; }
+.calendar-grid .day--booked { background: #DCDAD3; color: #9A978C; cursor: not-allowed; text-decoration: line-through; }
+.calendar-grid .day--booked:hover { background: #DCDAD3; }
+.calendar-legend { margin-top: 1rem; font-size: .78rem; color: var(--slate-soft); display: flex; flex-wrap: wrap; gap: .9rem; }
+.calendar-legend span { display: flex; align-items: center; gap: .4rem; }
+.calendar-flex-note { font-size: .82rem; font-style: italic; margin: .9rem 0 0; color: var(--slate-soft); }
 .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-.dot--available { background: var(--sky); }
+.dot--peak { background: var(--larch); }
+.dot--selected { background: var(--spruce); }
+.dot--booked { background: #9A978C; }
 
 .res-form { display: flex; flex-direction: column; gap: 1rem; }
 .res-form label { display: flex; flex-direction: column; gap: .4rem; font-size: .9rem; color: var(--slate); }
