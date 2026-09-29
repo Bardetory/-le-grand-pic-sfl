@@ -63,8 +63,8 @@
       </ul>
     </div>
     <div class="studio__gallery">
-      <img src="cuisine-lumiere.jpg" alt="Cuisine équipée, plaque à induction et rangements">
       <img src="salon-balcon-lit-depliable.jpg" alt="Salon avec table, canapé-lit et accès au balcon">
+      <img src="cuisine-lumiere.jpg" alt="Cuisine équipée, plaque à induction et rangements">
       <img src="salon-table-balcon.jpg" alt="Salle à manger avec accès au balcon">
       <img src="cuisine-salon-tv.jpg" alt="Coin cuisine et salle à manger avec télévision">
     </div>
@@ -88,10 +88,10 @@
       </figure>
       <figure>
         <img src="salon-canape-lit-depliable.jpg" alt="Canapé-lit déplié dans le séjour">
-        <figcaption>Canapé-lit confortable dans le séjour</figcaption>
+        <figcaption>Canapé-lit, matelas confortable de 180 cm</figcaption>
       </figure>
     </div>
-    <p class="sleeps__note">Un canapé-lit confortable complète les couchages dans le séjour, pour accueillir jusqu'à 6 personnes au total.</p>
+    <p class="sleeps__note">Le canapé-lit du séjour offre un vrai matelas de 180 cm de large, pensé pour un vrai confort de sommeil après une journée sur les pistes — pas un matelas d'appoint.</p>
   </section>
 
   <section class="vue-highlight">
@@ -113,7 +113,6 @@
     </div>
 
     <div id="map" class="map" role="img" aria-label="Carte de Saint-François-Longchamp avec les points d'intérêt autour de l'appartement"></div>
-    <p class="map__note">Positions approximatives, à ajuster avec l'adresse exacte de la résidence.</p>
 
     <ul class="nearby">
       <li><strong>Télésiège du Mollaret</strong> — moins de 50 m, accès direct vers Valmorel</li>
@@ -121,8 +120,7 @@
       <li><strong>Sherpa &amp; Spar</strong> — deux supérettes à proximité immédiate</li>
       <li><strong>2 fromageries-charcuteries</strong> — spécialités savoyardes à deux pas</li>
       <li><strong>Restaurants</strong> — de nombreuses adresses sur le haut de la station</li>
-      <li><strong>Espace bien-être</strong> — piscine, sauna, hammam, jacuzzis, massages, à 100 m</li>
-      <li><strong>Même bâtiment que le bien-être</strong> — bar, bowling et salle de sport</li>
+      <li><strong>Espace bien-être et activités</strong> — piscine, sauna, hammam, jacuzzis, massages, bar, bowling et salle de sport à 100 m</li>
     </ul>
 
     <div class="passes">
@@ -204,10 +202,9 @@
   <section id="reservation" class="reservation">
     <p class="section__eyebrow">Disponibilités &amp; réservation</p>
     <h2>Demander une réservation</h2>
-    <p class="reservation__intro">Aucune date n'est bloquée pour le moment.</p>
     <div class="price-badges">
-      <span class="price-badge price-badge--peak">800 € / semaine <small>vacances scolaires d'hiver</small></span>
-      <span class="price-badge">500 € / semaine <small>reste de l'année</small></span>
+      <span class="price-badge price-badge--peak">800 € / semaine <small>vacances scolaires, samedi à samedi</small></span>
+      <span class="price-badge">60 € / jour <small>hors vacances, 18h à 18h</small></span>
     </div>
 
     <div class="reservation__grid">
@@ -219,8 +216,11 @@
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
         <div class="calendar-legend">
-          <span class="dot dot--available"></span> Disponible — 1er clic : arrivée, 2e clic : départ
+          <span><span class="dot dot--peak"></span> Vacances scolaires</span>
+          <span><span class="dot dot--selected"></span> Sélectionné</span>
+          <span><span class="dot dot--booked"></span> Déjà réservé</span>
         </div>
+        <p class="calendar-flex-note">Vos dates ne correspondent pas exactement à ce que propose le calendrier ? Précisez-le dans le message ci-contre : on s'adapte selon les disponibilités, en échangeant par email.</p>
       </div>
 
       <form name="reservation" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="res-form">
