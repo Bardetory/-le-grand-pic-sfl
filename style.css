@@ -307,6 +307,7 @@ main section {
 }
 .price-badge small { font-family: var(--sans); font-size: .75rem; color: var(--slate-soft); margin-top: .2rem; }
 .price-badge--peak { border-color: var(--larch); background: rgba(185,112,47,.08); }
+.price-note { font-size: .85rem; font-style: italic; color: var(--slate-soft); margin: .8rem 0 0; }
 .reservation__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
