@@ -1,248 +1,393 @@
-// ---------- Menu mobile ----------
-const navToggle = document.getElementById('navToggle');
-const navLinks = document.getElementById('navLinks');
-if (navToggle) {
-  navToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
+:root {
+  --spruce: #1E3428;
+  --spruce-light: #35513F;
+  --larch: #B9702F;
+  --larch-dark: #935a26;
+  --snow: #F7F6F1;
+  --stone: #EAE5D8;
+  --slate: #232420;
+  --slate-soft: #55564F;
+  --sky: #5C7C87;
+  --radius: 2px;
+  --serif: "Newsreader", serif;
+  --sans: "Work Sans", sans-serif;
 }
 
-// ---------- FAQ accordion ----------
-document.querySelectorAll('.accordion__trigger').forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const panel = trigger.nextElementSibling;
-    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--slate);
+  background: var(--snow);
+  line-height: 1.55;
+}
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.15; margin: 0 0 .5em; color: var(--spruce); }
+h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.3rem); }
+p { margin: 0 0 1em; max-width: 62ch; color: var(--slate-soft); }
+a { color: var(--spruce); }
 
-    // close all
-    document.querySelectorAll('.accordion__trigger').forEach(t => {
-      t.setAttribute('aria-expanded', 'false');
-      t.nextElementSibling.style.maxHeight = null;
-    });
-
-    if (!isOpen) {
-      trigger.setAttribute('aria-expanded', 'true');
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    }
-  });
-});
-
-// ---------- Map ----------
-// ⚠️ COORDONNÉES À REMPLACER ⚠️
-// Pour chaque point, ouvre Google Maps, fais un clic droit sur l'endroit exact,
-// clique sur les chiffres qui apparaissent en haut (ex: 45.401234, 6.337456)
-// pour les copier, puis colle-les ci-dessous à la place des valeurs actuelles.
-const APARTMENT = { coords: [45.401, 6.337], label: "Le Grand Pic — l'appartement" };
-
-const POINTS_OF_INTEREST = [
-  { coords: [45.4015, 6.3378], label: 'Télésiège du Mollaret' },
-  { coords: [45.4008, 6.3365], label: 'Boulangerie' },
-  { coords: [45.4012, 6.3362], label: 'Sherpa (supérette)' },
-  { coords: [45.4022, 6.3385], label: 'Restaurants du haut de station' },
-  { coords: [45.4005, 6.3368], label: 'Espace bien-être / balnéo' }
-];
-
-if (document.getElementById('map') && window.L) {
-  const map = L.map('map', { scrollWheelZoom: false }).setView(APARTMENT.coords, 16);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors',
-    maxZoom: 18
-  }).addTo(map);
-
-  // Icône ambre distincte pour l'appartement
-  const apartmentIcon = L.divIcon({
-    className: 'apartment-marker',
-    html: '<span></span>',
-    iconSize: [22, 22],
-    iconAnchor: [11, 11]
-  });
-
-  L.marker(APARTMENT.coords, { icon: apartmentIcon, zIndexOffset: 1000 })
-    .addTo(map)
-    .bindPopup(`<strong>${APARTMENT.label}</strong>`)
-    .openPopup();
-
-  POINTS_OF_INTEREST.forEach(p => {
-    L.marker(p.coords).addTo(map).bindPopup(p.label);
-  });
+.section__eyebrow {
+  font-family: var(--sans);
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--larch);
+  margin: 0 0 .4em;
 }
 
-// ---------- Calendrier de disponibilités ----------
-const calendarGrid = document.getElementById('calendarGrid');
-const calendarLabel = document.getElementById('calendarLabel');
-const prevBtn = document.getElementById('prevMonth');
-const nextBtn = document.getElementById('nextMonth');
-const dateArrivee = document.getElementById('dateArrivee');
-const dateDepart = document.getElementById('dateDepart');
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--snow);
+  border-bottom: 1px solid rgba(30,52,40,.1);
+}
+.nav__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: .9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav__brand {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--spruce);
+  text-decoration: none;
+}
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+.nav__links a {
+  text-decoration: none;
+  color: var(--slate);
+  font-size: .95rem;
+}
+.nav__links a:hover { color: var(--larch); }
+.nav__cta {
+  background: var(--larch);
+  color: #fff !important;
+  padding: .55rem 1.1rem;
+  border-radius: var(--radius);
+}
+.nav__cta:hover { background: var(--larch-dark); }
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: .4rem;
+}
+.nav__toggle span { width: 22px; height: 2px; background: var(--spruce); }
 
-// Semaines de vacances scolaires (zone A) : réservation uniquement à la semaine, du samedi au samedi.
-// Source : calendrier officiel de l'Éducation nationale. À mettre à jour chaque année.
-const SCHOOL_HOLIDAY_PERIODS = [
-  { start: '2026-12-19', end: '2027-01-04' }, // Vacances de Noël
-  { start: '2027-02-13', end: '2027-03-01' }  // Vacances d'hiver
-];
-
-// Périodes déjà réservées par d'autres personnes (à compléter à la main : { start: 'AAAA-MM-JJ', end: 'AAAA-MM-JJ' })
-const BOOKED_RANGES = [];
-
-let current = new Date();
-current.setDate(1);
-
-let selStart = null; // Date d'arrivée
-let selEnd = null;   // Date de départ
-
-const monthNames = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-const dowNames = ['Lu','Ma','Me','Je','Ve','Sa','Di'];
-
-// Formatage en date locale (évite le décalage d'un jour de toISOString, qui convertit en UTC)
-function formatLocal(date) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, '0');
-  const d = String(date.getDate()).padStart(2, '0');
-  return `${y}-${m}-${d}`;
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.hero__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(20,32,25,.85) 0%, rgba(20,32,25,.35) 55%, rgba(20,32,25,.05) 100%);
+}
+.hero__content {
+  position: relative;
+  color: #fff;
+  padding: 3rem 1.5rem 3.5rem;
+  max-width: 720px;
+}
+.hero__eyebrow { color: var(--stone); font-size: .9rem; letter-spacing: .02em; margin-bottom: .6em; }
+.hero__content h1 { color: #fff; }
+.hero__lede { color: #EFEDE4; max-width: 52ch; }
+.hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 1.2rem 0 1.6rem;
+}
+.hero__badges span {
+  border: 1px solid rgba(255,255,255,.5);
+  padding: .35rem .8rem;
+  font-size: .85rem;
+  border-radius: var(--radius);
 }
 
-function parseLocal(str) {
-  const [y, m, d] = str.split('-').map(Number);
-  return new Date(y, m - 1, d);
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: var(--sans);
+  font-weight: 600;
+  padding: .85rem 1.7rem;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.btn--primary { background: var(--larch); color: #fff; }
+.btn--primary:hover { background: var(--larch-dark); }
+
+/* ---------- Sections shared ---------- */
+main section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem;
 }
 
-function isSameDay(a, b) {
-  return a && b && a.getTime() === b.getTime();
+/* Studio */
+.studio {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
 }
-
-function isPeakDate(date) {
-  return SCHOOL_HOLIDAY_PERIODS.some(p => date >= parseLocal(p.start) && date <= parseLocal(p.end));
+.checklist { list-style: none; padding: 0; margin: 1.3rem 0 0; }
+.checklist li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: .6rem;
+  color: var(--slate-soft);
 }
-
-function isBookedDate(date) {
-  return BOOKED_RANGES.some(r => date >= parseLocal(r.start) && date <= parseLocal(r.end));
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: .5em;
+  width: 7px; height: 7px;
+  background: var(--larch);
+  border-radius: 50%;
 }
-
-// Renvoie la semaine samedi -> samedi (exclusif) contenant la date donnée
-function getSaturdayWeek(date) {
-  const dow = date.getDay(); // 0 = dimanche ... 6 = samedi
-  const daysSinceSaturday = (dow + 1) % 7;
-  const start = new Date(date);
-  start.setDate(start.getDate() - daysSinceSaturday);
-  const end = new Date(start);
-  end.setDate(start.getDate() + 7);
-  return { start, end };
+.studio__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .8rem;
 }
+.studio__gallery img:first-child { grid-column: 1 / -1; }
+.studio__gallery img { border-radius: var(--radius); aspect-ratio: 4/3; object-fit: cover; }
 
-function handleDayClick(date) {
-  if (isBookedDate(date)) {
-    alert("Ces dates sont déjà réservées. N'hésitez pas à nous contacter par email pour vérifier une éventuelle disponibilité.");
-    return;
+/* Sleeps */
+.sleeps__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.sleeps__grid figure { margin: 0; }
+.sleeps__grid img { border-radius: var(--radius); aspect-ratio: 3/4; object-fit: cover; width: 100%; }
+.sleeps__grid figcaption { font-size: .88rem; color: var(--slate-soft); margin-top: .5rem; }
+.sleeps__note { margin-top: 1.8rem; font-style: italic; }
+
+/* Vue highlight */
+.vue-highlight { position: relative; max-width: none; padding: 0; margin: 0; }
+.vue-highlight img { width: 100%; height: 60vh; object-fit: cover; }
+.vue-highlight__caption {
+  position: absolute;
+  bottom: 2rem; left: 2rem;
+  background: rgba(30,52,40,.75);
+  color: #fff;
+  padding: .8rem 1.3rem;
+  border-radius: var(--radius);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+.vue-highlight__caption p { margin: 0; color: #fff; }
+
+/* Location */
+.location__intro { margin-top: 1rem; }
+.stats {
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0 2.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(30,52,40,.15);
+  border-bottom: 1px solid rgba(30,52,40,.15);
+}
+.stat strong { display: block; font-family: var(--serif); font-size: 1.9rem; color: var(--spruce); }
+.stat span { font-size: .85rem; color: var(--slate-soft); }
+.map { width: 100%; height: 420px; border-radius: var(--radius); z-index: 1; }
+.apartment-marker span {
+  display: block;
+  width: 22px; height: 22px;
+  background: var(--larch);
+  border: 3px solid #fff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+.map__note { font-size: .8rem; color: var(--slate-soft); margin-top: .6rem; }
+.nearby { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 2rem; }
+.nearby li { color: var(--slate-soft); border-top: 1px solid rgba(30,52,40,.12); padding-top: .7rem; }
+.nearby strong { color: var(--spruce); }
+.passes {
+  margin-top: 2.5rem;
+  background: var(--stone);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.8rem;
+}
+.passes h3 { font-size: 1.1rem; margin-bottom: .5rem; }
+.passes p { margin: 0; max-width: none; }
+
+/* Gallery */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  gap: .8rem;
+  margin-top: 2rem;
+}
+.gallery__grid img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
+.gallery__grid img.span-2 { grid-column: span 2; }
+
+/* FAQ */
+.accordion { margin-top: 2rem; border-top: 1px solid rgba(30,52,40,.15); }
+.accordion__item { border-bottom: 1px solid rgba(30,52,40,.15); }
+.accordion__trigger {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--spruce);
+  padding: 1.3rem .2rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.accordion__trigger::after {
+  content: "+";
+  font-family: var(--sans);
+  font-size: 1.4rem;
+  color: var(--larch);
+  flex-shrink: 0;
+}
+.accordion__trigger[aria-expanded="true"]::after { content: "–"; }
+.accordion__panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .25s ease;
+}
+.accordion__panel p { padding-bottom: 1.3rem; margin: 0; }
+
+/* Reservation */
+.reservation { background: var(--stone); max-width: none; }
+.reservation > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
+.reservation__intro { margin-top: .8rem; }
+.price-badges { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1rem 0 0; }
+.price-badge {
+  display: flex;
+  flex-direction: column;
+  background: var(--snow);
+  border: 1px solid rgba(30,52,40,.2);
+  border-radius: var(--radius);
+  padding: .7rem 1.1rem;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--spruce);
+}
+.price-badge small { font-family: var(--sans); font-size: .75rem; color: var(--slate-soft); margin-top: .2rem; }
+.price-badge--peak { border-color: var(--larch); background: rgba(185,112,47,.08); }
+.price-note { font-size: .85rem; font-style: italic; color: var(--slate-soft); margin: .8rem 0 0; }
+.reservation__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2.5rem;
+  align-items: start;
+}
+.calendar-wrap { background: var(--snow); padding: 1.5rem; border-radius: var(--radius); }
+.calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.calendar-header h3 { margin: 0; font-size: 1.1rem; text-transform: capitalize; }
+.calendar-nav { background: none; border: 1px solid rgba(30,52,40,.3); border-radius: var(--radius); width: 32px; height: 32px; cursor: pointer; font-size: 1.1rem; color: var(--spruce); }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center; font-size: .85rem; }
+.calendar-grid .dow { font-weight: 600; color: var(--slate-soft); padding-bottom: .4rem; font-size: .75rem; }
+.calendar-grid .day { padding: .5rem 0; border-radius: var(--radius); color: var(--slate); }
+.calendar-grid .day { padding: .5rem 0; border-radius: var(--radius); color: var(--slate); background: rgba(0,0,0,.02); cursor: pointer; }
+.calendar-grid .day:hover { background: rgba(92,124,135,.2); }
+.calendar-grid .day.empty { visibility: hidden; }
+.calendar-grid .day--peak { background: rgba(185,112,47,.15); color: var(--larch-dark); font-weight: 500; }
+.calendar-grid .day--selected { background: var(--spruce); color: #fff; font-weight: 600; }
+.calendar-grid .day--booked { background: #DCDAD3; color: #9A978C; cursor: not-allowed; text-decoration: line-through; }
+.calendar-grid .day--booked:hover { background: #DCDAD3; }
+.calendar-legend { margin-top: 1rem; font-size: .78rem; color: var(--slate-soft); display: flex; flex-wrap: wrap; gap: .9rem; }
+.calendar-legend span { display: flex; align-items: center; gap: .4rem; }
+.calendar-flex-note { font-size: .82rem; font-style: italic; margin: .9rem 0 0; color: var(--slate-soft); }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot--peak { background: var(--larch); }
+.dot--selected { background: var(--spruce); }
+.dot--booked { background: #9A978C; }
+
+.res-form { display: flex; flex-direction: column; gap: 1rem; }
+.res-form label { display: flex; flex-direction: column; gap: .4rem; font-size: .9rem; color: var(--slate); }
+.res-form input, .res-form textarea {
+  font-family: var(--sans);
+  padding: .7rem .8rem;
+  border: 1px solid rgba(30,52,40,.3);
+  border-radius: var(--radius);
+  font-size: .95rem;
+  background: var(--snow);
+}
+.res-form__dates { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.hidden-field { position: absolute; left: -9999px; }
+.res-form .btn { align-self: flex-start; margin-top: .5rem; }
+
+/* Footer */
+.footer { background: var(--spruce); color: var(--stone); }
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer__brand { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: .3rem; }
+.footer a { color: var(--stone); }
+.footer p { color: var(--stone); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .nav__links {
+    position: fixed;
+    top: 62px; left: 0; right: 0;
+    background: var(--snow);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
+    gap: 1.2rem;
+    display: none;
+    border-bottom: 1px solid rgba(30,52,40,.1);
   }
-
-  if (isPeakDate(date)) {
-    // Vacances scolaires : sélection automatique de la semaine samedi -> samedi
-    const week = getSaturdayWeek(date);
-    selStart = week.start;
-    selEnd = week.end;
-  } else {
-    // Hors vacances : sélection libre, jour par jour
-    if (selStart === null && selEnd === null) {
-      selStart = date;
-    } else if (selStart !== null && selEnd === null) {
-      if (isSameDay(date, selStart)) {
-        selStart = null; // on déclique l'unique date sélectionnée
-      } else if (date > selStart) {
-        selEnd = date;
-      } else {
-        selEnd = selStart;
-        selStart = date;
-      }
-    } else {
-      if (isSameDay(date, selStart)) {
-        selStart = selEnd;
-        selEnd = null;
-      } else if (isSameDay(date, selEnd)) {
-        selEnd = null;
-      } else if (date < selStart) {
-        selStart = date; // la période s'allonge
-      } else if (date > selEnd) {
-        selEnd = date; // la période s'allonge
-      } else {
-        // date à l'intérieur de la période : elle se raccourcit du côté le plus proche
-        const distToStart = date - selStart;
-        const distToEnd = selEnd - date;
-        if (distToStart <= distToEnd) selStart = date; else selEnd = date;
-      }
-    }
-  }
-
-  dateArrivee.value = selStart ? formatLocal(selStart) : '';
-  dateDepart.value = selEnd ? formatLocal(selEnd) : '';
-
-  renderCalendar(current);
+  .nav__links.open { display: flex; }
+  .nav__toggle { display: flex; }
+  .studio { grid-template-columns: 1fr; }
+  .sleeps__grid { grid-template-columns: 1fr 1fr; }
+  .sleeps__grid figure:first-child { grid-column: span 2; }
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery__grid img.span-2 { grid-column: span 2; }
+  .nearby { grid-template-columns: 1fr; }
+  .reservation__grid { grid-template-columns: 1fr; }
+  .res-form__dates { grid-template-columns: 1fr; }
+  .vue-highlight__caption { left: 1rem; right: 1rem; bottom: 1rem; }
 }
-
-function renderCalendar(date) {
-  calendarGrid.innerHTML = '';
-  calendarLabel.textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-
-  dowNames.forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'dow';
-    el.textContent = d;
-    calendarGrid.appendChild(el);
-  });
-
-  const year = date.getFullYear();
-  const month = date.getMonth();
-  const firstDay = new Date(year, month, 1);
-  const startOffset = (firstDay.getDay() + 6) % 7; // Lundi = 0
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-  for (let i = 0; i < startOffset; i++) {
-    const el = document.createElement('div');
-    el.className = 'day empty';
-    calendarGrid.appendChild(el);
-  }
-
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dayDate = new Date(year, month, d);
-    const el = document.createElement('div');
-    el.className = 'day';
-    el.textContent = d;
-
-    const booked = isBookedDate(dayDate);
-    const peak = isPeakDate(dayDate);
-    const selected = selStart && (
-      isSameDay(dayDate, selStart) ||
-      (selEnd && dayDate >= selStart && dayDate <= selEnd)
-    );
-
-    if (booked) {
-      el.classList.add('day--booked');
-      el.title = 'Déjà réservé';
-    } else {
-      if (peak) el.classList.add('day--peak');
-      if (selected) el.classList.add('day--selected');
-      el.title = peak ? 'Disponible — semaine vacances scolaires' : 'Disponible';
-    }
-
-    el.addEventListener('click', () => handleDayClick(dayDate));
-    calendarGrid.appendChild(el);
-  }
-}
-
-renderCalendar(current);
-
-prevBtn.addEventListener('click', () => {
-  current.setMonth(current.getMonth() - 1);
-  renderCalendar(current);
-});
-nextBtn.addEventListener('click', () => {
-  current.setMonth(current.getMonth() + 1);
-  renderCalendar(current);
-});
